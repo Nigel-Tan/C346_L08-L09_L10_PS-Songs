@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PS-Songs</string>
+    <string name="title">Songs Manager</string>
+    <string name="song_title">Song Title</string>
+    <string name="song_singer">Singer</string>
+    <string name="song_year">Year</string>
+    <string name="insert">Insert</string>
+    <string name="view_songs">View Songs</string>
+    <string name="app_description">Insert song details</string>
+    <string name="app_description2">View Song Details</string>
+    <string name="return_to_insert">Return to Insert</string>
+    <string name="display_ascending">Ascending songs (Oldest to latest)</string>
+    <string name="display_descending">Descending songs (Latest to oldest)</string>
+</resources>
