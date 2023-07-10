@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
@@ -21,6 +22,7 @@
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="@color/black"
         android:textSize="40sp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -29,7 +31,7 @@
         android:fontFamily="@font/neodex"
         android:gravity="center"
         android:paddingTop="10dp"
-        android:text="@string/app_description"
+        android:text="@string/app_description_edit"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="@color/black"
         android:textSize="25sp" />
@@ -42,7 +44,7 @@
         android:paddingTop="10dp">
 
         <EditText
-            android:id="@+id/etTitle"
+            android:id="@+id/etTitle1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -54,7 +56,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/etSinger"
+            android:id="@+id/etSinger1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -74,7 +76,7 @@
         android:paddingTop="10dp">
 
         <EditText
-            android:id="@+id/etYear"
+            android:id="@+id/etYear1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -116,7 +118,7 @@
             app:drawableStartCompat="@drawable/stars_svgrepo_com" />
 
         <RadioGroup
-            android:id="@+id/rgStars"
+            android:id="@+id/rgStars1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.8"
@@ -168,18 +170,24 @@
         android:paddingTop="10dp">
 
         <Button
-            android:id="@+id/btnInsert"
+            android:id="@+id/btnUpdate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/insert" />
+            android:text="@string/update" />
 
         <Button
-            android:id="@+id/btnView"
+            android:id="@+id/btnDelete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/view_songs" />
+            android:text="@string/delete" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel" />
 
 </LinearLayout>

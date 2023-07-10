@@ -11,4 +11,9 @@
     <string name="return_to_insert">Return to Insert</string>
     <string name="display_ascending">Ascending songs (Oldest to latest)</string>
     <string name="display_descending">Descending songs (Latest to oldest)</string>
+    <string name="show_all_songs_with_5_stars">Show all songs with 5 stars</string>
+    <string name="update">UPDATE</string>
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="app_description_edit">Edit song details</string>
 </resources>

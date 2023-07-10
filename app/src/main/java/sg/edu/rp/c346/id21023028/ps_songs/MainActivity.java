@@ -82,8 +82,13 @@ public class MainActivity extends AppCompatActivity {
         boolean title = !etTitle.getText().toString().trim().isEmpty();
         boolean singer = !etSinger.getText().toString().trim().isEmpty();
         boolean year = !etYear.getText().toString().isEmpty();
+        boolean yearValue = false;
 
-        if (title && singer && year){
+        if (year){ //verify if the year is 4 digits (valid year)
+            yearValue = etYear.getText().toString().length() ==4;
+        }
+
+        if (title && singer && year && yearValue){
             return true;
         }
         else{

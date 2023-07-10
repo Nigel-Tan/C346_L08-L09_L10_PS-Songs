@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PSSongs"
         tools:targetApi="31">
         <activity
+            android:name=".EditSong"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

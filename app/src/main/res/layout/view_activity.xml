@@ -57,6 +57,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/return_to_insert" />
+
+        <Button
+            android:id="@+id/btn5Stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/show_all_songs_with_5_stars" />
     </LinearLayout>
 
 </LinearLayout>
