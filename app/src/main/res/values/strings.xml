@@ -16,4 +16,8 @@
     <string name="delete">DELETE</string>
     <string name="cancel">CANCEL</string>
     <string name="app_description_edit">Edit song details</string>
+    <string name="defaultyearmsg">Filter songs by year</string>
+    <string-array name="spinnerItems">
+        <item>Filter song by year</item>
+    </string-array>
 </resources>

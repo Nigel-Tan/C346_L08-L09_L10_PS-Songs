@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,13 +21,19 @@ public class ViewSongs extends AppCompatActivity {
     ListView lv;
     ArrayList<String> dataString; //outdated, L08 code
     ArrayAdapter<Song> adapter;
+    ArrayAdapter<String> yearAdapter;
     Button btnReturn, btn5Stars;
     String order = " ASC";
     ArrayList<Song> al;
+    ArrayList<Integer> yearAl;
+    ArrayList<String> finalSpinnerList;
+    Spinner spinnerActivity;
+    boolean filterOption = false; //this is used so when 5 star button clicked, it will reset droplist while changing to only 5 star songs
 
     @Override
     protected void onResume() {
         super.onResume();
+        spinnerActivity.setSelection(0);
         dataPopulate();
     }
 
@@ -35,16 +42,56 @@ public class ViewSongs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_activity);
 
+        //population for spinner
+        populateSpinner();
 
         //link view to variables
+        spinnerActivity = findViewById(R.id.spinnerActivity);
         btnReturn = findViewById(R.id.btnReturn);
         btn5Stars = findViewById(R.id.btn5Stars);
-        //dataString = new ArrayList<>(); //outdated L08 code
-        al = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,al); //tbc
         lv = findViewById(R.id.lv);
+        //dataString = new ArrayList<>(); //outdated L08 code
+
+        //create adapter and needed arraylist
+        al = new ArrayList<>();
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,al);
+
+        //set adapter
+        spinnerActivity.setAdapter(yearAdapter);
         lv.setAdapter(adapter);
+
         dataPopulate();
+
+        //manage spinner value
+        spinnerActivity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                DBHelper dbh = new DBHelper(ViewSongs.this);
+                al.clear();
+                if (position==0){ //default value selected
+                    if (filterOption){
+                        dataPopulate5Stars();
+                        filterOption = false;
+                    }
+                    else{
+                        al.addAll(dbh.getTasks(order));
+                    }
+
+                }
+                else{
+                    String selectedValue = parent.getItemAtPosition(position).toString();
+                    int intValue = Integer.parseInt(selectedValue);
+                    al.addAll(dbh.getTasksByYear(order, intValue));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         //return back button
         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +105,7 @@ public class ViewSongs extends AppCompatActivity {
         btn5Stars.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spinnerActivity.setSelection(0);
                 dataPopulate5Stars(); //show 5 star songs only
             }
         });
@@ -93,6 +141,7 @@ public class ViewSongs extends AppCompatActivity {
 //        for (Song song : objectList){
 //            dataString.add(song.toString());
 //        }
+        db.close();
         al.addAll(objectList);
         adapter.notifyDataSetChanged();
     }
@@ -115,6 +164,8 @@ public class ViewSongs extends AppCompatActivity {
 //        }
         al.addAll(objectList);
         adapter.notifyDataSetChanged();
+        db.close();
+        filterOption = true;
     }
 
     @Override
@@ -138,5 +189,19 @@ public class ViewSongs extends AppCompatActivity {
             order = " ASC";
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void populateSpinner(){
+        DBHelper db = new DBHelper(ViewSongs.this);
+        yearAl = db.populateSpinner();
+        finalSpinnerList = new ArrayList<>();
+        finalSpinnerList.add("Select year value to filter");
+        for (int year : yearAl) {
+            finalSpinnerList.add(String.valueOf(year));
+        }
+
+        yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, finalSpinnerList);
+        yearAdapter.notifyDataSetChanged();
+        db.close();
     }
 }

@@ -102,6 +102,51 @@ public class DBHelper extends SQLiteOpenHelper {
         return songs;
     }
 
+    public ArrayList<Integer> populateSpinner(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_YEAR};
+        String sortOrder = COLUMN_YEAR + " ASC";
+        Cursor cursor = db.query(true, TABLE_SONG, columns, null, null, null, null, sortOrder, null);
+
+        ArrayList<Integer> yearList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                int year = cursor.getInt(0);
+                yearList.add(year);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return yearList;
+    }
+
+    public ArrayList<Song> getTasksByYear(String order, int yearInput) {
+        ArrayList<Song> songs = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {COLUMN_ID, COLUMN_TITLE, COLUMN_SINGER, COLUMN_YEAR, COLUMN_STARS};
+        String sortOrder = COLUMN_ID + order;
+        String condition = COLUMN_YEAR + " = ?";
+        String[] args = {String.valueOf(yearInput)};
+        Cursor cursor = db.query(TABLE_SONG, columns, condition, args, null, null, sortOrder, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String title = cursor.getString(1);
+                String singer = cursor.getString(2);
+                int year = cursor.getInt(3);
+                int stars = cursor.getInt(4);
+                Song obj = new Song(id, title, singer, year, stars);
+                songs.add(obj);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return songs;
+    }
+
+
     public ArrayList<Song> getTasksByStars(String order, int starInput) {
         ArrayList<Song> songs = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
