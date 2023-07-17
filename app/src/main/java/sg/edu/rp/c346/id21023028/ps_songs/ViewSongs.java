@@ -2,6 +2,7 @@ package sg.edu.rp.c346.id21023028.ps_songs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,8 +35,9 @@ public class ViewSongs extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        spinnerActivity.setSelection(0);
+        populateSpinner();
         dataPopulate();
+        spinnerActivity.setSelection(0);
     }
 
     @Override
@@ -44,7 +46,16 @@ public class ViewSongs extends AppCompatActivity {
         setContentView(R.layout.view_activity);
 
         //population for spinner
-        populateSpinner();
+        DBHelper db = new DBHelper(ViewSongs.this);
+        yearAl = db.populateSpinner();
+        finalSpinnerList = new ArrayList<>();
+        finalSpinnerList.add("Select year value to filter");
+        for (int year : yearAl) {
+            finalSpinnerList.add(String.valueOf(year));
+        }
+        yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, finalSpinnerList);
+        yearAdapter.notifyDataSetChanged();
+        db.close();
 
         //link view to variables
         spinnerActivity = findViewById(R.id.spinnerActivity);
@@ -194,15 +205,15 @@ public class ViewSongs extends AppCompatActivity {
     }
 
     private void populateSpinner(){
+        Log.i("spinner","populated");
         DBHelper db = new DBHelper(ViewSongs.this);
         yearAl = db.populateSpinner();
-        finalSpinnerList = new ArrayList<>();
+        finalSpinnerList.clear();
         finalSpinnerList.add("Select year value to filter");
         for (int year : yearAl) {
             finalSpinnerList.add(String.valueOf(year));
         }
 
-        yearAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, finalSpinnerList);
         yearAdapter.notifyDataSetChanged();
         db.close();
     }

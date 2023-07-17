@@ -125,7 +125,7 @@ public class EditSong extends AppCompatActivity {
             return true;
         }
         else{
-            Toast.makeText(EditSong.this,"Insert failed, check fields.",
+            Toast.makeText(EditSong.this,"Update failed, check fields.",
                     Toast.LENGTH_SHORT).show();
             return false;
         }

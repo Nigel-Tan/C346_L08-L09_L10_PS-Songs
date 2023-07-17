@@ -49,23 +49,13 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@drawable/textviewbox"
+            android:drawableStart="@drawable/icons8_music_note"
             android:drawableEnd="@drawable/icons8_music_note"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/song_title"
             android:inputType="text" />
 
-        <EditText
-            android:id="@+id/etSinger1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:background="@drawable/textviewbox"
-            android:drawableEnd="@drawable/musician_svgrepo_com"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="@string/song_singer"
-            android:inputType="text" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,13 +71,24 @@
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@drawable/textviewbox"
-            android:drawableStart="@drawable/calendar_days_svgrepo_com"
             android:drawableEnd="@drawable/calendar_days_svgrepo_com"
             android:ems="10"
             android:gravity="center"
             android:hint="@string/song_year"
             android:inputType="number"
             android:paddingBottom="10dp" />
+
+        <EditText
+            android:id="@+id/etSinger1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@drawable/textviewbox"
+            android:drawableEnd="@drawable/musician_svgrepo_com"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/song_singer"
+            android:inputType="text" />
 
 
     </LinearLayout>
