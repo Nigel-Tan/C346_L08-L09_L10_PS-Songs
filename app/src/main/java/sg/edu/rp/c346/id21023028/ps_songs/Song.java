@@ -70,4 +70,15 @@ public class Song implements Serializable {
         String msg = String.format("Song Title: %s\nSinger: %s\nYear: %4d\n%1d %5s",title,singers,year,stars,quickConvert(stars));
         return msg;
     }
+
+    //L10 stars display method
+    public String starsDisplay() {
+        StringBuilder starBuilder = new StringBuilder();
+        for (int i = 0; i < stars; i++) {
+            starBuilder.append("* ");
+        }
+        return starBuilder.toString().trim();
+    }
+
+
 }

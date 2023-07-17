@@ -19,8 +19,9 @@ import java.util.ArrayList;
 public class ViewSongs extends AppCompatActivity {
 
     ListView lv;
-    ArrayList<String> dataString; //outdated, L08 code
-    ArrayAdapter<Song> adapter;
+    //ArrayList<String> dataString; //outdated, L08 code
+    //ArrayAdapter<Song> adapter; //outdated, L09 code
+    CustomAdapter adapter;
     ArrayAdapter<String> yearAdapter;
     Button btnReturn, btn5Stars;
     String order = " ASC";
@@ -54,7 +55,8 @@ public class ViewSongs extends AppCompatActivity {
 
         //create adapter and needed arraylist
         al = new ArrayList<>();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,al);
+        //adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,al); //L09 adapter
+        adapter = new CustomAdapter(this, R.layout.row, al);
 
         //set adapter
         spinnerActivity.setAdapter(yearAdapter);
